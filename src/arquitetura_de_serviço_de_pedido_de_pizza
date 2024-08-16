@@ -1,0 +1,34 @@
+digraph "Arquitetura de serviço de pedido de pizza" {
+	graph [fontcolor="#2D3436" fontname="Sans-Serif" fontsize=15 label="Arquitetura de serviço de pedido de pizza" nodesep=0.60 pad=2.0 rankdir=LR ranksep=0.75 splines=ortho]
+	node [fixedsize=true fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 height=1.4 imagescale=true labelloc=b shape=box style=rounded width=1.4]
+	edge [color="#7B8894"]
+	ef275bf4beb24c63a71e1592b9e0b4d9 [label="Aplicativo mobile" height=1.9 image="C:\ucl\Python312\Lib\site-packages\resources/onprem/client\users.png" shape=none]
+	"5a8971e30eb2490fa8b92f267433571a" [label="Site web" height=1.9 image="C:\ucl\Python312\Lib\site-packages\resources/onprem/client\users.png" shape=none]
+	f11264b425fe40a89369b1d4b7b0fbaa [label="Load Balancer" height=1.9 image="C:\ucl\Python312\Lib\site-packages\resources/aws/network\elastic-load-balancing.png" shape=none]
+	"743bac9c87c84c0eb4aa0d59f139ac5d" [label="API Gateway" height=1.9 image="C:\ucl\Python312\Lib\site-packages\resources/aws/network\api-gateway.png" shape=none]
+	"0ae6b1c732844d27a25767d036dd2425" [label=Cache height=1.9 image="C:\ucl\Python312\Lib\site-packages\resources/aws/database\elasticache.png" shape=none]
+	subgraph "cluster_Serviços" {
+		graph [bgcolor="#E5F5FD" fontname="Sans-Serif" fontsize=12 label="Serviços" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"88288517f27245568be11380c30f3112" [label="Serviço de pedido" height=1.9 image="C:\ucl\Python312\Lib\site-packages\resources/aws/compute\lambda.png" shape=none]
+		"9c76b1ab291843d0a8c0fda052899d17" [label="Serviço de pagamento" height=1.9 image="C:\ucl\Python312\Lib\site-packages\resources/aws/compute\lambda.png" shape=none]
+		subgraph "cluster_Notification Cluster" {
+			graph [bgcolor="#EBF3E7" fontname="Sans-Serif" fontsize=12 label="Notification Cluster" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+			"0c45e47649c64b06a2597f428f2d498d" [label="Serviço de notificação" height=1.9 image="C:\ucl\Python312\Lib\site-packages\resources/aws/compute\lambda.png" shape=none]
+		}
+		"14c3e7dc9cd64f10a15eb378564eba59" [label="Serviço de delivery" height=1.9 image="C:\ucl\Python312\Lib\site-packages\resources/aws/compute\lambda.png" shape=none]
+	}
+	b7d116505dcf43a585a7ca9556fb9629 [label="Order Store" height=1.9 image="C:\ucl\Python312\Lib\site-packages\resources/aws/storage\simple-storage-service-s3.png" shape=none]
+	fb8bdc0f9b054033ae57d12e816f525e [label="Order Database" height=1.9 image="C:\ucl\Python312\Lib\site-packages\resources/aws/database\dynamodb.png" shape=none]
+	ef275bf4beb24c63a71e1592b9e0b4d9 -> f11264b425fe40a89369b1d4b7b0fbaa [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	f11264b425fe40a89369b1d4b7b0fbaa -> "743bac9c87c84c0eb4aa0d59f139ac5d" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"743bac9c87c84c0eb4aa0d59f139ac5d" -> "88288517f27245568be11380c30f3112" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"5a8971e30eb2490fa8b92f267433571a" -> f11264b425fe40a89369b1d4b7b0fbaa [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"88288517f27245568be11380c30f3112" -> "9c76b1ab291843d0a8c0fda052899d17" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"88288517f27245568be11380c30f3112" -> "0c45e47649c64b06a2597f428f2d498d" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"88288517f27245568be11380c30f3112" -> "14c3e7dc9cd64f10a15eb378564eba59" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"88288517f27245568be11380c30f3112" -> b7d116505dcf43a585a7ca9556fb9629 [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"88288517f27245568be11380c30f3112" -> fb8bdc0f9b054033ae57d12e816f525e [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"0ae6b1c732844d27a25767d036dd2425" -> "0c45e47649c64b06a2597f428f2d498d" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"0c45e47649c64b06a2597f428f2d498d" -> fb8bdc0f9b054033ae57d12e816f525e [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"14c3e7dc9cd64f10a15eb378564eba59" -> fb8bdc0f9b054033ae57d12e816f525e [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+}
